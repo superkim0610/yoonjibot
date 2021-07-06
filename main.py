@@ -12,7 +12,7 @@ import json
 import logging
 # http://whaleon.naver.com/on/1234567890
 client = discord.Client()
-token = "ODYwODUzNjYyNzcwMDAzOTg4.YOBScw.HLPFIhiKputSqHz4dCQMnuUgl48"
+token = "TOKEN"
 
 @client.event
 async def on_ready():
