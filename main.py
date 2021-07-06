@@ -19,13 +19,18 @@ async def on_message(message):
             await message.channel.send("디즈니 씹덕!")
         if message.content == "디즈니 씹덕은?" or message.content == "디즈니 씹덕은":
             await message.channel.send("윤지!")
-        if message.content == "윤지 생일":
-            await message.channel.send(message.author.mention+" 내 생일 2월 8일!")
-        if len(message.centent.split()) == 2:
+        if len(message.content.split()) == 2:
             if message.content.split()[1] == "생일":
                 # message.content.split()[0]
                 for i in range(len(birth)-1):
-                    if not message.content.split()[0].find(birth[i][0]) == -1 or message.content.split()[0].find(str(birth[i][0])[1:3]) == -1:
-                        await message.channel.send(message.author.mention + str(birth[i][0])[1:3] + "이의 생일은 " + birth[i][1])
+                    # if not message.content.split()[0].find(birth[i][0]) == -1 or message.content.split()[0].find(str(birth[i][0])[1:3]) == -1:
+                    if message.content.split()[0] == birth[i][0] or message.content.split()[0] == str(birth[i][0])[1:3]:
+                        await message.channel.send(message.author.mention + str(birth[i][0])[1:3] + " 생일 " + getBirthString(birth[i][1]) + "!")
+
+def getBirthString(_birth):
+    m = _birth[0:2]
+    d = _birth[2:4]
+    return m.strip("0") + "월 " + d.strip("0") + "일"
+
 access_token = os.environ['BOT_TOKEN']
 client.run(access_token)
