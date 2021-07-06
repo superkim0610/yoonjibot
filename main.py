@@ -1,8 +1,9 @@
 # coding=<utf-8>
 import discord
+import os
 # http://whaleon.naver.com/on/1234567890
 client = discord.Client()
-token = "ODYwODUzNjYyNzcwMDAzOTg4.YOBScw.NNy2eqwFPHDhL5ARC9SBygzw-5U"
+token = ""
 
 @client.event
 async def on_ready():
