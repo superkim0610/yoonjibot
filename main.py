@@ -22,15 +22,15 @@ async def on_message(message):
         if len(message.content.split()) == 2:
             if message.content.split()[1] == "생일":
                 # message.content.split()[0]
-                for i in range(len(birth)-1):
+                for i in range(len(birth)):
                     # if not message.content.split()[0].find(birth[i][0]) == -1 or message.content.split()[0].find(str(birth[i][0])[1:3]) == -1:
                     if message.content.split()[0] == birth[i][0] or message.content.split()[0] == str(birth[i][0])[1:3]:
-                        await message.channel.send(message.author.mention + str(birth[i][0])[1:3] + " 생일 " + getBirthString(birth[i][1]) + "!")
+                        await message.channel.send(message.author.mention + " " + str(birth[i][0])[1:3] + " 생일 " + getBirthString(birth[i][1]) + "!")
 
 def getBirthString(_birth):
     m = _birth[0:2]
     d = _birth[2:4]
-    return m.strip("0") + "월 " + d.strip("0") + "일"
+    return m.lstrip("0") + "월 " + d.lstrip("0") + "일"
 
 access_token = os.environ['BOT_TOKEN']
 client.run(access_token)
