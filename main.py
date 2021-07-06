@@ -1,14 +1,7 @@
 # coding=<utf-8>
 import discord
-import asyncio
-import youtube_dl 
 import time
-import urllib.request
 from urllib.parse import quote
-import re
-import random
-import pickle
-import json
 import logging
 # http://whaleon.naver.com/on/1234567890
 client = discord.Client()
