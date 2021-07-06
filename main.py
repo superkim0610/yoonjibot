@@ -3,7 +3,6 @@ import discord
 import os
 # http://whaleon.naver.com/on/1234567890
 client = discord.Client()
-token = ""
 
 @client.event
 async def on_ready():
@@ -22,4 +21,4 @@ async def on_message(message):
         if message.content == "윤지 생일":
             await message.channel.send(message.author.mention+" 내 생일 2월 8일!")
 access_token = os.environ["BOT_TOKEN"]
-client.run(token)
+client.run(access_token)
