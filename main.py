@@ -3,8 +3,7 @@ import discord
 import os
 from discord.message import Message
 client = discord.Client()
-birth = [["한윤찬", "0201"],["박채진", "0206"],["박윤지", "0208"],["김효인", "0211"],["안태흠", "0328"],["신수빈", "0411"],["이서형", "0427"],["김태윤", "0610"],["전승흔", "0830"],["주하윤", "0930"],["윤성훈", "1019"],["공지민", "1108"],["김주
-함", "1120"]]
+birth = [["한윤찬", "0201"],["박채진", "0206"],["박윤지", "0208"],["김효인", "0211"],["안태흠", "0328"],["신수빈", "0411"],["이서형", "0427"],["김태윤", "0610"],["전승흔", "0830"],["주하윤", "0930"],["윤성훈", "1019"],["공지민", "1108"],["김주함", "1120"]]
 
 @client.event
 async def on_ready():
@@ -18,6 +17,8 @@ async def on_message(message):
             await message.channel.send("오..")
         if message.content == "윤지는?" or message.content == "윤지는":
             await message.channel.send("디즈니 씹덕!")
+        if message.content == "칼답은?" or message.content == "칼답은":
+            await message.channel.send("김태윤!")
         if message.content == "디즈니 씹덕은?" or message.content == "디즈니 씹덕은":
             await message.channel.send("윤지!")
         if len(message.content.split()) == 2:
