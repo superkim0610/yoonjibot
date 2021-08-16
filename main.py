@@ -5,7 +5,7 @@ import math
 from discord.message import Message
 client = discord.Client()
 auto_delete = False
-auto_delete_id = "857906844022603787"
+auto_delete_id = 857906844022603787
 birth = [["한윤찬", "0201"],["박채진", "0206"],["박윤지", "0208"],["김효인", "0211"],["안태흠", "0328"],["신수빈", "0411"],["이서형", "0427"],["김태윤", "0610"],["전승흔", "0830"],["주하윤", "0930"],["이여명", "1004"],["윤성훈", "1019"],["공지민", "1108"],["김주함", "1120"]]
 def quadratic_equation(a,b,c):
     if a.startswith("-"):
@@ -30,7 +30,7 @@ def quadratic_equation(a,b,c):
 
 @client.event
 async def on_ready():
-    game = discord.Game("디즈니 덕질") # 상태 메시지
+    game = discord.Game("디즈니 덕질!") # 상태 메시지
     await client.change_presence(status=discord.Status.online, activity=game)
 
 @client.event
@@ -57,8 +57,7 @@ async def on_message(message):
             auto_delete = False
             await message.channel.send("ㅠ")
         if message.content.startswith("윤지야 다음은 "):
-            auto_delete_id = message.content.split()[2]
-            await message.channel.send(auto_delete_id)
+            auto_delete_id = int(message.content.split()[2])
         if auto_delete:
             if message.author.id == auto_message_id:
                 await message.channel.send("ㅋㅋ")
