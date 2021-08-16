@@ -30,7 +30,7 @@ def quadratic_equation(a,b,c):
 
 @client.event
 async def on_ready():
-    game = discord.Game("디즈니 덕질!!!") # 상태 메시지
+    game = discord.Game("디즈니 덕질") # 상태 메시지
     await client.change_presence(status=discord.Status.online, activity=game)   
 
 @client.event
@@ -57,10 +57,11 @@ async def on_message(message):
             await message.channel.send("ㅠ")
         if message.content.startswith("윤지야 다음은 "):
             auto_delete_id = message.content.split[2]
+            await message.channel.send(auto_delete_id)
         if auto_delete:
             if message.author.id == auto_message_id:
                 await message.channel.send("ㅋㅋ")
-                await message.delete(message)
+                await message.delete()
             else:
                 await message.channel.send("ㄴㄴ")
         if message.content.startswith("윤지야 이차방정식 "):
