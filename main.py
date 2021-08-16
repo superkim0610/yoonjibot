@@ -38,7 +38,6 @@ async def on_message(message):
     if not message.author.bot:
         if message.content =="오" or message.content =="오..":
             await message.channel.send("오..")
-            await message.channel.send(type(message.author.id))
         if message.content == "윤지는?" or message.content == "윤지는":
             await message.channel.send("디즈니 씹덕!")
         if message.content == "디즈니 씹덕은?" or message.content == "디즈니 씹덕은":
