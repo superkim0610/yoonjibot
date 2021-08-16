@@ -50,11 +50,16 @@ async def on_message(message):
                         await message.channel.send(message.author.mention + str(birth[i][0])[1:3] + " 생일 " + getBirthString(birth[i][1]) + "!")
         if messege.content == "윤지야 드가자":
             auto_delete = True
+            await message.channel.send("ㄱ")
+            await message.channel.send(str(auto_delete))
         if message.content == "윤지야 나가자":
             auto_delete = False
+            await message.channel.send("ㅠ")
+            await message.channel.send(str(auto_delete))
         if auto_delete:
             if message.author.id == "857906844022603787":
                 await message.delete(message)
+                await message.channel.send("컷 ㅋ")
         if message.content.startswith("윤지야 이차방정식 "):
             if len(message.content.split()) == 5:
                 await message.channel.send("𝓍 = "+str(quadratic_equation(message.content.split()[2],message.content.split()[3],message.content.split()[4])).strip("(").strip(")").strip("0").strip("."))
