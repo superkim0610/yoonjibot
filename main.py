@@ -59,6 +59,7 @@ async def on_message(message):
         if message.content.startswith("윤지야 다음은 "):
             auto_delete_id = int(message.content.split()[2])
         if auto_delete:
+            await message.channel.send("on "+str(auto_message_id))
             if message.author.id == auto_message_id:
                 await message.channel.send("ㅋㅋ")
                 await message.delete()
