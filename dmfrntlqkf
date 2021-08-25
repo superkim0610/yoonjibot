@@ -46,27 +46,6 @@ async def on_message(message):
 
         f=open("C:\\Users\\super0979\\Desktop\\을구\\command_list.txt","r",encoding="UTF-8")
         i = f.read()
-        print(i)
-
-
-
-        _key_list="["
-        _value_list="["
-        _author_list="["
-        while not i.find(";") == -1 and not i.count(";") == 1:
-            _key_list+="'"+i[i.find("_")+1:i.find("-")]+"',"  
-            i=i[i.find("-")+1:len(i)+1]
-            _value_list+="["
-            _author_list+="["
-            while i.find(">") < i.find("_"):
-                _value_list+="'"+i[i.find(";")+1:i.find(":")]+"',"
-                _author_list+=i[i.find("<")+1:i.find(">")]+","
-                i=i[i.find(">")+1:len(i)+1]
-            _value_list=_value_list[0:len(_value_list)-1]+"],"
-            _author_list=_author_list[0:len(_author_list)-1]+"],"
-        _key_list=_key_list[0:len(_key_list)-1]+"]"
-        _value_list=_value_list[0:len(_value_list)-1]+"]"
-        _author_list=_author_list[0:len(_author_list)-1]+"]"
 
         _key_list=[]
         _value_list=[]
@@ -82,10 +61,12 @@ async def on_message(message):
                 _author_list[p].append(i[i.find("<")+1:i.find(">")])
                 i=i[i.find(">")+1:len(i)+1]
         p+=1
-
-
-        synchroniztion()
+        key_list=_key_list
+        value_list=_value_list
+        author_list=_author_list
+        synchronization()
         await message.channel.send("동기화 성공")
+
     if message.content == "을구야 명령어 목록" or message.content == "을구야 명령어목록":
         embed=discord.Embed(title="을구 명령어 목록", description="을구 제작자 김태윤 올림")
         for i in range(len(key_list)):
