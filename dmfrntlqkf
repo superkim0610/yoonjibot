@@ -1,0 +1,124 @@
+import discord
+import pickle
+import random
+client = discord.Client()
+token = "ODc5OTUxMDE3MTg0MjEwOTY0.YSXMPw.mccaKl46V-mu_bNqZyCkKdm3yic"
+
+key_list = []
+value_list = []
+author_list = []
+# load command_list
+with open("command_list.dmfrn","rb") as fr:
+    [key_list,value_list,author_list] = pickle.load(fr)
+
+def synchroniztion():
+    with open("command_list.dmfrn","wb") as fw:
+        pickle.dump([key_list,value_list,author_list], fw)
+
+@client.event
+async def on_ready():
+    game = discord.Game("을구야 도움말 ㄱ")
+    await client.change_presence(status=discord.Status.online, activity=game)
+
+@client.event
+async def on_message(message):
+    global key_list
+    global value_list
+    global author_list
+    if message.content == "을구야":
+        await message.channel.send("ㅎㅇ?")
+
+    if message.content == "을구야 명령어 목록 출력":
+        if message.author.id == 381305737298706433:
+            a=""
+            for i in range(len(key_list)):
+                a+="\n\n_"+key_list[i]+"-\n"
+                for j in range(len(value_list[i])):
+                    a+=";"+value_list[i][j] + ":<" + str(author_list[i][j])+">\n"
+            print(a)
+            f=open("C:\\Users\\super0979\\Desktop\\을구\\command_list.txt","w",encoding="UTF-8")
+            f.write(a)
+            f.close()
+            await message.channel.send("출력 성공")
+    
+    if message.content == "을구야 명령어 목록 새로고침":
+
+
+        f=open("C:\\Users\\super0979\\Desktop\\을구\\command_list.txt","r",encoding="UTF-8")
+        i = f.read()
+        print(i)
+
+
+
+        _key_list="["
+        _value_list="["
+        _author_list="["
+        while not i.find(";") == -1 and not i.count(";") == 1:
+            _key_list+="'"+i[i.find("_")+1:i.find("-")]+"',"  
+            i=i[i.find("-")+1:len(i)+1]
+            _value_list+="["
+            _author_list+="["
+            while i.find(">") < i.find("_"):
+                _value_list+="'"+i[i.find(";")+1:i.find(":")]+"',"
+                _author_list+=i[i.find("<")+1:i.find(">")]+","
+                i=i[i.find(">")+1:len(i)+1]
+            _value_list=_value_list[0:len(_value_list)-1]+"],"
+            _author_list=_author_list[0:len(_author_list)-1]+"],"
+        _key_list=_key_list[0:len(_key_list)-1]+"]"
+        _value_list=_value_list[0:len(_value_list)-1]+"]"
+        _author_list=_author_list[0:len(_author_list)-1]+"]"
+
+        _key_list=[]
+        _value_list=[]
+        _author_list=[]
+        while not i.find(";") == -1 and not i.count(";") == 1:
+            _key_list.append(i[i.find("_")+1:i.find("-")])
+            i=i[i.find("-")+1:len(i)+1]
+            while i.find(">") < i.find("_"):
+                _value_list+="'"+i[i.find(";")+1:i.find(":")]+"',"
+                _author_list+=i[i.find("<")+1:i.find(">")]+","
+                i=i[i.find(">")+1:len(i)+1]
+            _value_list=_value_list[0:len(_value_list)-1]+"],"
+            _author_list=_author_list[0:len(_author_list)-1]+"],"
+        _key_list=_key_list[0:len(_key_list)-1]+"]"
+        _value_list=_value_list[0:len(_value_list)-1]+"]"
+        _author_list=_author_list[0:len(_author_list)-1]+"]"
+
+
+        synchroniztion()
+        await message.channel.send("동기화 성공")
+    if message.content == "을구야 명령어 목록" or message.content == "을구야 명령어목록":
+        embed=discord.Embed(title="을구 명령어 목록", description="을구 제작자 김태윤 올림")
+        for i in range(len(key_list)):
+            embed.add_field(name=key_list[i], value=str(value_list[i]).strip("[").strip("]"), inline=True)
+        embed.set_footer(text="우리 을구 잘 부탁드려요...")
+        await message.channel.send(embed=embed)
+
+    # add key and value
+    if not message.content.find("을구야 ") == -1:
+        if not message.content.find("=") == -1:
+            sended_key = message.content.split("을구야 ")[1].split("=")[0].strip()
+            sended_value = message.content.split("을구야 ")[1].split("=")[1].strip()
+            if not sended_key in key_list:
+                key_list.append(sended_key)
+                value_list.append([sended_value])
+                author_list.append([message.author.id])
+                await message.delete()
+                await message.channel.send(message.author.mention+"(이)가 \""+sended_key+"\"(은)는 \""+sended_value+"\"(이)래")
+            else:
+                if sended_value in value_list[key_list.index(sended_key)]:
+                    if message.author.id == author_list[key_list.index(sended_key)][value_list[key_list.index(sended_key)]]:
+                        await message.channel.send(message.author.mention+"야 도배 멈춰!")
+                        await message.channel.send("야 도배 멈춰!")
+                    else:
+                        value_list[key_list.index(sended_key)].append(sended_value)
+                        author_list[key_list.index(sended_key)].append(message.author.id)
+            synchroniztion()
+    # send value
+    if not message.content.find("을구야 ") == -1:
+        if message.content.split("을구야 ")[1] in key_list:
+            if len(value_list[key_list.index(message.content.split("을구야 ")[1])]) == 1:
+                await message.channel.send(value_list[key_list.index(message.content.split("을구야 ")[1])][0])
+            else:
+                await message.channel.send(value_list[key_list.index(message.content.split("을구야 ")[1])][random.randrange(0,len(value_list[key_list.index(message.content.split("을구야 ")[1])]))])
+client.run(token)
