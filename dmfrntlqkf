@@ -71,18 +71,17 @@ async def on_message(message):
         _key_list=[]
         _value_list=[]
         _author_list=[]
+        p = 0
         while not i.find(";") == -1 and not i.count(";") == 1:
             _key_list.append(i[i.find("_")+1:i.find("-")])
+            _value_list.append()
+            _author_list.append()
             i=i[i.find("-")+1:len(i)+1]
             while i.find(">") < i.find("_"):
-                _value_list+="'"+i[i.find(";")+1:i.find(":")]+"',"
-                _author_list+=i[i.find("<")+1:i.find(">")]+","
+                _value_list[p].append(i[i.find(";")+1:i.find(":")])
+                _author_list[p].append(i[i.find("<")+1:i.find(">")])
                 i=i[i.find(">")+1:len(i)+1]
-            _value_list=_value_list[0:len(_value_list)-1]+"],"
-            _author_list=_author_list[0:len(_author_list)-1]+"],"
-        _key_list=_key_list[0:len(_key_list)-1]+"]"
-        _value_list=_value_list[0:len(_value_list)-1]+"]"
-        _author_list=_author_list[0:len(_author_list)-1]+"]"
+        p+=1
 
 
         synchroniztion()
