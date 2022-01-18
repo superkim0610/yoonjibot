@@ -1,6 +1,7 @@
 import discord
 from random import randrange
 import datetime
+import os
 
 client = discord.Client()
 
