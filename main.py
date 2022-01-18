@@ -2,7 +2,6 @@ import discord
 from random import randrange
 import datetime
 
-discord_token = 'dd'
 client = discord.Client()
 
 q = []
@@ -74,4 +73,5 @@ async def on_message(message):
                 await message.channel.send(f'({_i+1}) {q[_i][0]}보다 {q[_i][1]}만큼 큰 수')
             else:
                 await message.channel.send(f'({_i+1}) {q[_i][0]}보다 {q[_i][1]}만큼 작은 수')
-client.run(discord_token)
+access_token = os.environ['BOT_TOKEN']
+client.run(access_token)
